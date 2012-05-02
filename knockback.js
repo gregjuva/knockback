@@ -6,18 +6,17 @@
     https://github.com/kmalakoff/knockback/blob/master/LICENSE
   Dependencies: Knockout.js, Backbone.js, and Underscore.js.
     Optional dependency: Backbone.ModelRef.js.
-*/if (!this.ko) {
-  throw new Error('Knockback: Dependency alert! Knockout.js must be included before this file');
+*/
+var Backbone, Knockback, kb, ko, _;
+if (typeof exports !== 'undefined') {
+  Knockback = kb = exports;
+} else {
+  this.Knockback = this.kb = {};
 }
-if (!this.Backbone) {
-  throw new Error('Knockback: Dependency alert! Backbone.js must be included before this file');
-}
-if (!this._ || !this._.VERSION) {
-  throw new Error('Knockback: Dependency alert! Underscore.js must be included before this file');
-}
-this.Knockback || (this.Knockback = {});
-this.kb || (this.kb = this.Knockback);
 Knockback.VERSION = '0.14.2';
+_ = !this._ && (typeof require !== 'undefined') ? require('underscore') : this._;
+Backbone = !this.Backbone && (typeof require !== 'undefined') ? require('backbone') : this.Backbone;
+ko = !this.Knockout && (typeof require !== 'undefined') ? require('knockout') : this.ko;
 Knockback.locale_manager;
 Knockback.wrappedObservable = function(instance) {
   if (!instance._kb_observable) {
@@ -57,7 +56,7 @@ Knockback.vmReleaseObservables = function(view_model, keys) {
     if (!(ko.isObservable(value) || (value instanceof kb.Observables) || (value instanceof kb.ViewModel_RCBase))) {
       continue;
     }
-    if (keys && !_.contains(keys, key)) {
+    if (keys && (keys.indexOf(key) === -1)) {
       continue;
     }
     view_model[key] = null;
@@ -92,9 +91,6 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
   child.__super__ = parent.prototype;
   return child;
 };
-if (!this.Knockback) {
-  throw new Error('Knockback: Dependency alert! knockback_core.js must be included before this file');
-}
 Knockback.CollectionObservable = (function() {
   function CollectionObservable(collection, vm_observable_array, options) {
     var defer, event, _i, _j, _len, _len2, _ref, _ref2;
@@ -412,9 +408,6 @@ Knockback.sortedIndexWrapAttr = Knockback.siwa = function(attribute_name, wrappe
     https://github.com/kmalakoff/knockback/blob/master/LICENSE
 */
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-if (!this.Knockback) {
-  throw new Error('Knockback: Dependency alert! knockback_core.js must be included before this file');
-}
 Knockback.DefaultWrapper = (function() {
   function DefaultWrapper(observable, default_value) {
     this.default_value = default_value;
@@ -456,10 +449,7 @@ Knockback.defaultWrapper = function(observable, default_value) {
   Knockback.FormattedObservable is freely distributable under the MIT license.
   See the following for full license details:
     https://github.com/kmalakoff/knockback/blob/master/LICENSE
-*/if (!this.Knockback) {
-  throw new Error('Knockback: Dependency alert! knockback_core.js must be included before this file');
-}
-Knockback.toFormattedString = function(format) {
+*/Knockback.toFormattedString = function(format) {
   var arg, args, index, parameter_index, result, value;
   result = format.slice();
   args = Array.prototype.slice.call(arguments, 1);
@@ -563,10 +553,7 @@ Knockback.formattedObservable = function(format, args) {
   Knockback.LocalizedObservable is freely distributable under the MIT license.
   See the following for full license details:
     https://github.com/kmalakoff/knockback/blob/master/LICENSE
-*/if (!this.Knockback) {
-  throw new Error('Knockback: Dependency alert! knockback_core.js must be included before this file');
-}
-Knockback.LocalizedObservable = (function() {
+*/Knockback.LocalizedObservable = (function() {
   function LocalizedObservable(value, options, view_model) {
     this.value = value;
     this.options = options != null ? options : {};
@@ -695,10 +682,7 @@ Knockback.localizedObservable = function(value, options, view_model) {
   Knockback.Observable is freely distributable under the MIT license.
   See the following for full license details:
     https://github.com/kmalakoff/knockback/blob/master/LICENSE
-*/if (!this.Knockback) {
-  throw new Error('Knockback: Dependency alert! knockback_core.js must be included before this file');
-}
-Knockback.Observable = (function() {
+*/Knockback.Observable = (function() {
   function Observable(model, options, view_model) {
     this.model = model;
     this.options = options;
@@ -901,10 +885,7 @@ Knockback.observable = function(model, options, view_model) {
   Knockback.Observables is freely distributable under the MIT license.
   See the following for full license details:
     https://github.com/kmalakoff/knockback/blob/master/LICENSE
-*/if (!this.Knockback) {
-  throw new Error('Knockback: Dependency alert! knockback_core.js must be included before this file');
-}
-Knockback.Observables = (function() {
+*/Knockback.Observables = (function() {
   function Observables(model, mappings_info, view_model, options_or_writeable) {
     var is_string, mapping_info, view_model_property_name, write, _ref, _ref2;
     this.model = model;
@@ -975,10 +956,7 @@ Knockback.observables = function(model, mappings_info, view_model, options) {
   Knockback.Observable is freely distributable under the MIT license.
   See the following for full license details:
     https://github.com/kmalakoff/knockback/blob/master/LICENSE
-*/if (!this.Knockback) {
-  throw new Error('Knockback: Dependency alert! knockback_core.js must be included before this file');
-}
-Knockback.TriggeredObservable = (function() {
+*/Knockback.TriggeredObservable = (function() {
   function TriggeredObservable(model, event_name) {
     this.model = model;
     this.event_name = event_name;
@@ -1066,9 +1044,6 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
   child.__super__ = parent.prototype;
   return child;
 };
-if (!this.Knockback) {
-  throw new Error('Knockback: Dependency alert! knockback_core.js must be included before this file');
-}
 AttributeConnector = (function() {
   function AttributeConnector(model, key, read_only) {
     this.key = key;
